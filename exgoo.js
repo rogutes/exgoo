@@ -169,7 +169,6 @@ var goo = function(query) {
       $('#next', container).onclick = function() { get_parse_format(result.next); };
     }
   };
-  document.head.innerHTML = '';
   get_parse_format();
   return summary;
 };
