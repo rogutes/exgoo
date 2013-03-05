@@ -5,6 +5,8 @@ String.prototype.$fmt = function() {
     return args[m1];
   });
 };
+function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+function $$(sel, ctx) { return (ctx || document).querySelectorAll(sel); }
 
 var find_under_node = function(q, node) {
   var children = node.children,
