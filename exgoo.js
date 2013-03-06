@@ -141,9 +141,11 @@ var goo_parse = function(response, summary) {
   return {'ok': true, 'next': next_link};
 };
 
-var goo = function(query) {
-  var summary = {},
-      container = document.body;
+var goo = function(query, container) {
+  var summary = {};
+  if (!container) {
+    container = document.body;
+  }
 
   var get_parse_format = function(url) {
     var result, html = '';
