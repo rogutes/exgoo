@@ -89,7 +89,6 @@ var goo_parse = function(response, summary) {
   if (!summary.byhost) summary.byhost = {};
   if (!summary.ranked) summary.ranked = [];
   doc.innerHTML = response;
-  window.goo_doc = doc;  // DBG
 
   next_link = $('#pnnext', doc);
   if (next_link) {
@@ -98,6 +97,7 @@ var goo_parse = function(response, summary) {
 
   var results = $$('#ires ol li.g', doc);
   if (!results.length) {
+    window.goo_last = doc;  // DBG
     return {'error': 'No search results found (#ires ol li.g).', 'next': next_link};
   }
   window.goo_results = results;  // DBG
@@ -173,7 +173,6 @@ var goo = function(query, container) {
     }
   };
   get_parse_format();
-  window.goo_summary = summary;  // DBG
   return summary;
 };
 
