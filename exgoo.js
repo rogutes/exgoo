@@ -39,7 +39,7 @@ var summary_to_table = function(summary) {
   summary.ranked.forEach(function(result) {
     no++;
     html += '<li>' +
-      '<div class="host">' + result.host + '</div>' +
+      '<div class="host">' + result.host + '<span class="dim">' + result.url.slice(result.url.indexOf(result.host) + result.host.length) + '</span></div>' +
       '<div class="result">' +
         '<a href="{0}">{1}</a>'.$fmt(encodeURI(result.url), result.url_text) +
         (result.cached ? ' &ndash; <a href="{0}">Cached</a>'.$fmt(encodeURI(result.cached)) : '') +
@@ -182,7 +182,8 @@ var goo = function(query, container) {
       return;
     }
 
-    container.innerHTML = summary_to_table(summary);
+    container.innerHTML = '<h3>' + query.replace('<', '&lt;').replace('>', '&gt;') + '</h3>';
+    container.innerHTML += summary_to_table(summary);
     if (result.next) {
       container.innerHTML += '<p><a href="#" id="next">Get more results</a>';
       $('#next', container).onclick = function() { get_parse_format(result.next); };
