@@ -175,4 +175,3 @@ var goo = function(query) {
   return summary;
 };
 
-goo(decodeURIComponent(window.location.search.match(/q=([^&]+)/)));
