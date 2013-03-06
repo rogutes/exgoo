@@ -89,6 +89,7 @@ var goo_parse = function(response, summary) {
   if (!summary.byhost) summary.byhost = {};
   if (!summary.ranked) summary.ranked = [];
   doc.innerHTML = response;
+  window.goo_doc = doc;  // DBG
 
   next_link = $('#pnnext', doc);
   if (next_link) {
@@ -97,12 +98,12 @@ var goo_parse = function(response, summary) {
 
   var results = $$('#ires ol li.g', doc);
   if (!results.length) {
-    window.goo_obj = doc;
+    window.goo_last = doc;  // DBG
     return {'error': 'No search results found (#ires ol li.g).', 'next': next_link};
   }
   for (var i = 0, len = results.length; i < len; i++) {
     var result = results[i];  // result is a <li class="g"> element
-    window.goo_obj = result;
+    window.goo_last = result;  // DBG
     if (!$('.r', result)) {
       continue;
     }
@@ -170,7 +171,8 @@ var goo = function(query) {
     }
   };
   get_parse_format();
+  window.goo_summary = summary;  // DBG
   return summary;
 };
 
-console.log(goo(decodeURIComponent(window.location.search.match(/q=([^&]+)/))));
+goo(decodeURIComponent(window.location.search.match(/q=([^&]+)/)));
