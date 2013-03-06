@@ -142,10 +142,26 @@ var goo_parse = function(response, summary) {
 };
 
 var goo = function(query, container) {
-  var summary = {};
+  if (!/google\.[a-z]{2,3}/.test(window.location.host)) {
+    alert('Must be on google.com (or some other google tld).');
+    return;
+  }
+  if (!query) {
+    query = window.location.hash.match(/[?&]q=([^&$]+)/);
+    if (!query) {
+      query = window.location.search.match(/[?&]q=([^&$]+)/);
+    }
+    if (query && query.length == 2) {
+      query = decodeURIComponent(query[1]);
+    }
+    else {
+      query = prompt('Your Google query:');
+    }
+  }
   if (!container) {
     container = document.body;
   }
+  var summary = {};
 
   var get_parse_format = function(url) {
     var result, html = '';
