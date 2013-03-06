@@ -98,9 +98,9 @@ var goo_parse = function(response, summary) {
 
   var results = $$('#ires ol li.g', doc);
   if (!results.length) {
-    window.goo_last = doc;  // DBG
     return {'error': 'No search results found (#ires ol li.g).', 'next': next_link};
   }
+  window.goo_results = results;  // DBG
   for (var i = 0, len = results.length; i < len; i++) {
     var result = results[i];  // result is a <li class="g"> element
     window.goo_last = result;  // DBG
