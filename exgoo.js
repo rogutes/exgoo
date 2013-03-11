@@ -104,7 +104,8 @@ var goo_parse = function(response, summary) {
   for (var i = 0, len = results.length; i < len; i++) {
     var result = results[i];  // result is a <li class="g"> element
     window.goo_last = result;  // DBG
-    if (!$('.r', result)) {
+    // skip non-results or result containers with an id (images/videos/news)
+    if (result.id || !$('.r', result)) {
       continue;
     }
     result_link = $('.r a[href]', result);
