@@ -183,12 +183,14 @@ var goo = function(query, container) {
       return;
     }
 
+    var scroll_top = document.body.scrollTop;
     document.title = query;
     container.innerHTML = summary_to_table(summary);
     if (result.next) {
       container.innerHTML += '<p><a href="#" id="next">Get more results</a>';
       $('#next', container).onclick = function() { get_parse_format(result.next); };
     }
+    document.body.scrollTop = scroll_top;
   };
   get_parse_format();
   return summary;
