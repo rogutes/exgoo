@@ -183,8 +183,8 @@ var goo = function(query, container) {
       return;
     }
 
-    container.innerHTML = '<h3>' + query.replace('<', '&lt;').replace('>', '&gt;') + '</h3>';
-    container.innerHTML += summary_to_table(summary);
+    document.title = query;
+    container.innerHTML = summary_to_table(summary);
     if (result.next) {
       container.innerHTML += '<p><a href="#" id="next">Get more results</a>';
       $('#next', container).onclick = function() { get_parse_format(result.next); };
