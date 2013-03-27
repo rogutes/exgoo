@@ -65,7 +65,7 @@ var goo_search = function(query, url) {
       loc = window.location,
       base_url = loc.protocol + '//' + loc.host;
   if (query) {
-    url = base_url + '/search?num=100&as_qdr=all&q=' + encodeURIComponent(query);
+    url = base_url + '/search?num=100&as_qdr=all&q=' + encodeURIComponent(query).replace('%2B', '+');
   }
   xhr.open('GET', url, false);
   xhr.send();
@@ -183,14 +183,14 @@ var goo = function(query, container) {
       return;
     }
 
-    var scroll_top = document.body.scrollTop;
+    var scroll_top = container.scrollTop;
     document.title = query;
     container.innerHTML = summary_to_table(summary);
     if (result.next) {
       container.innerHTML += '<p><a href="#" id="next">Get more results</a>';
       $('#next', container).onclick = function() { get_parse_format(result.next); };
     }
-    document.body.scrollTop = scroll_top;
+    container.scrollTop = scroll_top;
   };
   get_parse_format();
   return summary;
